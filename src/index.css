@@ -1,13 +1,132 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://use.typekit.net/rlp0lka.css");
+
+/* CSS Variables */
+:root {
+  --white: white;
+  --text-primary: black;
+  --text-secondary-light: #757575;
+  --text-secondary-dark: rgba(198, 198, 198, 0.8);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+::selection {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Reset Styles */
+
+* {
+  box-sizing: border-box;
+  font-family: "acumin-pro", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+/* Header & Text Styles */
+
+h1 {
+  font-size: 120px;
+}
+
+h2 {
+  margin-top: 40px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+p {
+  color: var(--text-secondary-light);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--text-secondary-dark);
+  margin: 0;
+}
+
+/* Universal Styles */
+
+.container {
+  width: 100%;
+  padding-left: max(50px, calc((100vw - 1200px) / 2));
+  padding-right: max(50px, calc((100vw - 1200px) / 2));
+}
+
+.containerFull {
+  padding: 20px;
+}
+
+.imageContainer {
+  padding: 0 15px 15px 15px;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.p20 {
+  font-size: 20px;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.margin0 {
+  margin: 0 !important;
+}
+
+.image100 {
+  width: 100%;
+  border-radius: 30px;
+}
+
+.minorHeadline {
+  font-size: 48px;
+  line-height: 55px;
+  font-weight: 600;
+}
+
+.grayText {
+  color: var(--text-secondary-light);
+}
+
+.invertedColors {
+  color: var(--text-secondary-dark);
+  background-color: var(--text-primary);
 }
