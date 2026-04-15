@@ -44,13 +44,13 @@
 /* CSS Variables */
 :root {
   --color-bg: black;
-  --color-fg: white;
-  --color-secondary: #757575;
+  --color-fg: #ffffff;
+  --color-secondary: #252525;
   --color-red: #db2c2c;
   --color-secondary-dark: rgba(198, 198, 198, 0.8);
   --font-display: "Magnolia MVB", serif;
-  /*--font-body: "legitima", serif;*/
   --font-body: "ITC Giovanni", serif;
+  --font-sans-serif: sans-serif;
 }
 
 ::selection {
@@ -94,12 +94,14 @@ a {
 
 h1 {
   font-family: var(--font-display);
-  font-size: 120px;
+  font-size: 72px;
+  font-weight: normal;
 }
 
 h2 {
   font-size: 36px;
-  font-weight: bold;
+  /*font-weight: bold;*/
+
 }
 
 h3 {
@@ -125,6 +127,14 @@ hr {
 
 .bold {
   font-weight: bold !important;
+}
+
+.black {
+  font-weight: bolder !important;
+}
+
+.sans-serif {
+  font-family: var(--font-sans-serif);
 }
 
 /* Layout */
@@ -189,6 +199,14 @@ ul, li {
   color: var(--color-secondary);
 }
 
+.whiteText {
+  color: var(--color-fg) !important;
+}
+
+.grayBackground {
+  background-color: var(--color-secondary);
+}
+
 .redText {
   color: var(--color-red);
 }
@@ -198,4 +216,21 @@ ul, li {
   background-color: var(--color-fg);
 }
 
+.tornEdge {
+  position: relative;
+  overflow: hidden;
+}
 
+.tornEdge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("./media/images/ripped-edge.png") center / 100% 100% no-repeat;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lowZIndex {
+  position: relative;
+  z-index: -1;
+}

@@ -1,0 +1,16 @@
+.newsCardImage {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border-radius: 15px;
+}
+
+.newsCard {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.newsCard:hover {
+    transform: scale(1.03);
+}
