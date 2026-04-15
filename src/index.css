@@ -1,32 +1,79 @@
 @import url("https://use.typekit.net/rlp0lka.css");
+@import url("https://use.typekit.net/ulh6dsl.css");
+
+@font-face {
+  font-family: "Magnolia MVB";
+  src: url("./media/fonts/MagnoliaMVBStd-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITC Giovanni";
+  src: url("./media/fonts/GiovanniStd-Book.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITC Giovanni";
+  src: url("./media/fonts/GiovanniStd-Bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITC Giovanni";
+  src: url("./media/fonts/GiovanniStd-BookItalic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ITC Giovanni";
+  src: url("./media/fonts/GiovanniStd-BoldItalic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
 
 /* CSS Variables */
 :root {
-  --white: white;
-  --text-primary: black;
-  --text-secondary-light: #757575;
-  --text-secondary-dark: rgba(198, 198, 198, 0.8);
+  --color-bg: black;
+  --color-fg: white;
+  --color-secondary: #757575;
+  --color-red: #db2c2c;
+  --color-secondary-dark: rgba(198, 198, 198, 0.8);
+  --font-display: "Magnolia MVB", serif;
+  /*--font-body: "legitima", serif;*/
+  --font-body: "ITC Giovanni", serif;
 }
 
 ::selection {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: red;
+  color: var(--color-fg);
 }
 
 /* Reset Styles */
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
-  font-family: "acumin-pro", sans-serif;
-  font-weight: 500;
-  font-style: normal;
 }
 
 body {
   margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-style: normal;
+  font-size: 16px;
+  color: var(--color-fg);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6, p, blockquote, pre {
@@ -37,26 +84,26 @@ a {
   color: inherit;
   text-decoration: inherit;
   font-size: inherit;
-  font-family: inherit;
 }
 
-/* Header & Text Styles */
+/* Typography */
+
+.titleFont {
+  font-family: var(--font-display);
+}
 
 h1 {
+  font-family: var(--font-display);
   font-size: 120px;
-}
-
-h2 {
-  margin-top: 40px;
-}
-
-h3 {
-  font-size: 24px;
 }
 
 h2 {
   font-size: 36px;
   font-weight: bold;
+}
+
+h3 {
+  font-size: 24px;
 }
 
 h4 {
@@ -65,21 +112,26 @@ h4 {
 }
 
 p {
-  color: var(--text-secondary-light);
+  /*color: var(--color-secondary);*/
+  color: var(--color-red);
+  font-size: 20px;
 }
 
 hr {
   border: none;
-  border-top: 1px solid var(--text-secondary-dark);
+  border-top: 1px solid var(--color-secondary-dark);
   margin: 0;
 }
 
-/* Universal Styles */
+.bold {
+  font-weight: bold !important;
+}
+
+/* Layout */
 
 .container {
   width: 100%;
-  padding-left: max(50px, calc((100vw - 1200px) / 2));
-  padding-right: max(50px, calc((100vw - 1200px) / 2));
+  padding: 50px max(50px, calc((100vw - 1200px) / 2));
 }
 
 .containerFull {
@@ -88,6 +140,13 @@ hr {
 
 .imageContainer {
   padding: 0 15px 15px 15px;
+}
+
+/* Utilities */
+
+hr {
+  border: solid .1px black;
+  margin: 30px 0;
 }
 
 .textCenter {
@@ -107,13 +166,17 @@ ul, li {
   padding: 0;
   list-style: none;
 }
+
 .margin0 {
   margin: 0 !important;
 }
 
+.marginBottom {
+  margin-bottom: 20px !important;
+}
+
 .image100 {
   width: 100%;
-  border-radius: 30px;
 }
 
 .minorHeadline {
@@ -123,10 +186,16 @@ ul, li {
 }
 
 .grayText {
-  color: var(--text-secondary-light);
+  color: var(--color-secondary);
+}
+
+.redText {
+  color: var(--color-red);
 }
 
 .invertedColors {
-  color: var(--text-secondary-dark);
-  background-color: var(--text-primary);
+  color: var(--color-secondary-dark);
+  background-color: var(--color-fg);
 }
+
+
