@@ -3,11 +3,17 @@
     color: var(--color-bg);
     padding-top: 40px;
     padding-bottom: 40px;
+    position: relative;
+    box-shadow: 0 -8px 16px rgba(0, 0, 0, .1);
 }
 
 .footer p {
     color: var(--color-bg);
     margin: 0;
+}
+
+.footer h2 {
+    font-size: 36px;
 }
 
 .footerSocials {

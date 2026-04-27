@@ -26,6 +26,10 @@
     flex-shrink: 0;
 }
 
+.header h2 {
+    font-size: 36px;
+}
+
 .logo {
     width: 50px;
 }

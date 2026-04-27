@@ -1,5 +1,6 @@
 @import url("https://use.typekit.net/rlp0lka.css");
 @import url("https://use.typekit.net/ulh6dsl.css");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
 
 @font-face {
   font-family: "Magnolia MVB";
@@ -41,6 +42,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Segment7";
+  src: url("./media/fonts/7segment.woff") format("woff");
+  font-display: swap;
+}
+
 /* CSS Variables */
 :root {
   --color-bg: black;
@@ -50,6 +57,7 @@
   --color-secondary-dark: rgba(198, 198, 198, 0.8);
   --font-display: "Magnolia MVB", serif;
   --font-body: "ITC Giovanni", serif;
+  --font-mono: "Special Elite", "Courier Prime", "Courier New", monospace;
   --font-sans-serif: sans-serif;
 }
 
@@ -99,9 +107,8 @@ h1 {
 }
 
 h2 {
-  font-size: 36px;
-  /*font-weight: bold;*/
-
+  font-size: 48px;
+  font-weight: normal;
 }
 
 h3 {
@@ -135,6 +142,32 @@ hr {
 
 .sans-serif {
   font-family: var(--font-sans-serif);
+}
+
+.monoText {
+  font-family: var(--font-mono);
+}
+
+/* Colors */
+
+.grayText {
+  color: var(--color-secondary);
+}
+
+.whiteText {
+  color: var(--color-fg) !important;
+}
+
+.redText {
+  color: var(--color-red);
+}
+
+.colorBlack {
+  color: var(--color-bg);
+}
+
+.greenInkText {
+  color: #3a4f45;
 }
 
 /* Layout */
@@ -171,7 +204,7 @@ hr {
   font-size: 20px;
 }
 
-ul, li {
+ul, ol, li {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -195,20 +228,8 @@ ul, li {
   font-weight: 600;
 }
 
-.grayText {
-  color: var(--color-secondary);
-}
-
-.whiteText {
-  color: var(--color-fg) !important;
-}
-
 .grayBackground {
   background-color: var(--color-secondary);
-}
-
-.redText {
-  color: var(--color-red);
 }
 
 .invertedColors {
@@ -233,4 +254,20 @@ ul, li {
 .lowZIndex {
   position: relative;
   z-index: -1;
+}
+
+.zIndex10 {
+  position: relative;
+  z-index: 10;
+}
+
+.sevenSegment {
+  font-family: "Segment7", monospace;
+}
+
+.signoffText {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }

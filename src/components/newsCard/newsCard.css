@@ -3,7 +3,6 @@
     aspect-ratio: 16 / 9;
     object-fit: cover;
     display: block;
-    border-radius: 15px;
 }
 
 .newsCard {
@@ -13,4 +12,22 @@
 
 .newsCard:hover {
     transform: scale(1.03);
+}
+
+.newsCardMeta {
+    margin-top: 28px;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+}
+
+.newsCardTitle {
+    margin-top: 14px;
+}
+
+.newsCardDescription {
+    margin-top: 18px;
+    font-style: italic;
+    line-height: 1.4;
 }

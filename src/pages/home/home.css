@@ -38,6 +38,7 @@
 .homeGameplay {
     position: relative;
     overflow: hidden;
+    margin: 100px 0;
 }
 
 .homeGameplay::after {
@@ -57,6 +58,7 @@
 .homeDevDiary {
     position: relative;
     overflow: hidden;
+    margin: 100px 0;
 }
 
 .homeDevDiary::before {
@@ -73,3 +75,4 @@
     pointer-events: none;
     transform: rotate(45deg);
 }
+

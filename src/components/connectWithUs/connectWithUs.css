@@ -1,0 +1,122 @@
+.playbill {
+    --sdPaper: #c9b5a3;
+    --sdInkGreen: #4f6a5d;
+    position: relative;
+    padding: 80px max(50px, calc((100vw - 1200px) / 2));
+    background-color: var(--sdPaper);
+    background-image:
+        linear-gradient(rgba(201, 181, 163, 0.55), rgba(201, 181, 163, 0.55)),
+        url("../../media/images/paperTexture.jpg");
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply, normal;
+}
+
+.playbill::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: var(--color-bg);
+    mask-image: url("../../media/images/ripped-edge-top.png");
+    -webkit-mask-image: url("../../media/images/ripped-edge-top.png");
+    mask-size: 100% auto;
+    -webkit-mask-size: 100% auto;
+    mask-position: bottom center;
+    -webkit-mask-position: bottom center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    transform: scaleY(-1);
+    pointer-events: none;
+}
+
+.bloodTl {
+    position: absolute;
+    pointer-events: none;
+    width: 280px;
+    height: 220px;
+    background: url("../../media/images/bloodsplatter.png") no-repeat center / contain;
+    opacity: 0.42;
+    mix-blend-mode: multiply;
+    top: 10px;
+    left: -30px;
+    transform: rotate(220deg);
+}
+
+.playbillDoors {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    padding: 0 50px;
+}
+
+.playbillDoor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    cursor: pointer;
+    text-align: center;
+    border-right: 1.5px solid var(--sdInkGreen);
+    transition: background 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+.playbillDoor:last-child {
+    border-right: none;
+}
+
+.playbillDoor:hover {
+    background: rgba(79, 106, 93, 0.1);
+    transform: translateY(-2px);
+}
+
+.playbillDoorNum {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: #3a4f45;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.playbillDoorIcon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.playbillDoorName {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: #000;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+}
+
+.playbillDoorLabel {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--color-red);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+    .playbillDoors {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .playbillDoor:nth-child(2) {
+        border-right: none;
+    }
+    .playbillDoor:nth-child(1),
+    .playbillDoor:nth-child(2) {
+        border-bottom: 1.5px solid var(--sdInkGreen);
+    }
+}
