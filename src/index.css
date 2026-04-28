@@ -170,6 +170,18 @@ hr {
   color: #3a4f45;
 }
 
+/* Backgrounds */
+
+.paperBackground {
+  background-color: #c9b5a3;
+  background-image:
+    linear-gradient(rgba(201, 181, 163, 0.1), rgba(201, 181, 163, 0.1)),
+    url("./media/images/paperTexture.jpg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply, normal;
+}
+
 /* Layout */
 
 .container {

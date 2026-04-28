@@ -1,52 +1,39 @@
 import './recentSuperstars.css'
 
 const DEFAULT_STARS = [
-    { name: "Marigold V.",       unit: "MR-419", status: "decommissioned" },
-    { name: "Atlas Quill",       unit: "AQ-088", status: "renewed" },
-    { name: "Saint Penelope",    unit: "SP-006", status: "active" },
-    { name: "Beautiful Dimitri", unit: "BD-013", status: "replaced" },
-    { name: "Carmen Vassal",     unit: "CV-201", status: "active" },
-    { name: "The Heron",         unit: "HR-044", status: "decommissioned" },
-    { name: "Lou Sweetbriar",    unit: "LS-355", status: "active" },
-    { name: "Felix Mortimer",    unit: "FM-099", status: "renewed" },
+    { name: "Marigold",  serial: "41927", date: "12-MAR-2026", status: "decommissioned" },
+    { name: "Atlas",     serial: "08851", date: "04-APR-2026", status: "renewed" },
+    { name: "Penelope",  serial: "00614", date: "18-APR-2026", status: "active" },
+    { name: "Zephyr",    serial: "13302", date: "22-FEB-2026", status: "replaced" },
+    { name: "Carmen",    serial: "20188", date: "09-APR-2026", status: "active" },
+    { name: "Vega",      serial: "04473", date: "27-JAN-2026", status: "decommissioned" },
+    { name: "Lou",       serial: "35540", date: "15-APR-2026", status: "active" },
+    { name: "Orion",     serial: "09926", date: "01-APR-2026", status: "renewed" },
 ];
-
-const STAMP_LABELS = {
-    active: "ACTIVE",
-    renewed: "RENEWED",
-    decommissioned: "DECOMMISSIONED",
-    replaced: "REPLACED",
-};
 
 function RecentSuperstars({
     stars = DEFAULT_STARS,
     eyebrow = "The Audition · Roll Call",
-    title = "Active Roster",
-    subtitle = "Bulletin No. 28 · Subject to Decommission",
-    footer = "Listings rotate every 14 days · Replacements arrive on Mondays",
-    stampLabels = STAMP_LABELS,
+    title = "Recent Superstars",
+    subtitle = "Honoring those who the investors most adored",
 }) {
     return (
         <section className="recentSuperstars">
-            <div className="ssHeader">
-                <div className="ssEyebrow monoText greenInkText">{eyebrow}</div>
+            <div className="superStarHeader paperBackground textCenter">
+                <div className="superStarEyebrow monoText greenInkText">{eyebrow}</div>
                 <h2 className="titleFont colorBlack">{title}</h2>
-                <div className="ssSub monoText greenInkText">{subtitle}</div>
+                <div className="superStarSub monoText greenInkText">{subtitle}</div>
             </div>
 
-            <div className="ssBoard">
+            <div className="superStarBoard">
                 {stars.map((s, i) => (
-                    <div key={s.unit + "-" + i} className="ssCard" data-status={s.status}>
-                        <div className="ssName titleFont colorBlack">{s.name}</div>
-                        <div className="ssUnit monoText greenInkText">Unit {s.unit}</div>
-                        <div className="ssStamp monoText">
-                            {stampLabels[s.status] || (s.status || "").toUpperCase()}
-                        </div>
+                    <div key={s.serial + "-" + i} className="superStarCard paperBackground textCenter" data-status={s.status}>
+                        <div className="superStarName colorBlack">{s.name}</div>
+                        <div className="superStarDate monoText greenInkText">{s.date}</div>
+                        <div className="superStarStamp monoText">{s.serial}</div>
                     </div>
                 ))}
             </div>
-
-            {footer && <div className="ssFooter monoText">{footer}</div>}
         </section>
     );
 }

@@ -61,6 +61,7 @@ export function Component() {
                         category="Dev Diary"
                         date="April 14th 2026"
                         description="A behind-the-scenes look at the making of The Audition."
+                        to="/dev-diary-1"
                     />
                     <NewsCard
                         image={news2}

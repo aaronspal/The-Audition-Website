@@ -28,6 +28,10 @@ const router = createBrowserRouter([
         path: 'download',
         lazy: () => import('./pages/download/download'),
       },
+      {
+        path: 'dev-diary-1',
+        lazy: () => import('./pages/devDiary/devDiary'),
+      },
     ],
   },
 ]);

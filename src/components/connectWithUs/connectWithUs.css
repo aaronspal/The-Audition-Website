@@ -1,15 +1,7 @@
 .playbill {
-    --sdPaper: #c9b5a3;
     --sdInkGreen: #4f6a5d;
     position: relative;
     padding: 80px max(50px, calc((100vw - 1200px) / 2));
-    background-color: var(--sdPaper);
-    background-image:
-        linear-gradient(rgba(201, 181, 163, 0.55), rgba(201, 181, 163, 0.55)),
-        url("../../media/images/paperTexture.jpg");
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: multiply, normal;
 }
 
 .playbill::before {

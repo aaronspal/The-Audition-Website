@@ -1,0 +1,152 @@
+.devDiary {
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: 80px;
+}
+
+.devDiary::before {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: -70px;
+    width: 480px;
+    height: 360px;
+    background: url("../../media/images/bloodsplatter.png") no-repeat center / contain;
+    opacity: 0.22;
+    pointer-events: none;
+    transform: rotate(200deg);
+    z-index: 0;
+}
+
+.devDiary > * {
+    position: relative;
+    z-index: 1;
+}
+
+.devDiaryBack {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.devDiaryBack:hover {
+    opacity: 0.7;
+}
+
+.devDiaryBack::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--color-red);
+}
+
+.devDiaryKicker {
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-secondary-dark);
+    margin-top: 40px;
+}
+
+.devDiaryTitle {
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    margin: 18px 0 0;
+    max-width: 14ch;
+    letter-spacing: 0.01em;
+}
+
+.devDiaryDeck {
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    margin-top: 24px;
+    max-width: 640px;
+}
+
+.devDiaryMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 32px;
+    padding: 18px 0;
+    border-top: 1px solid var(--color-secondary-dark);
+    border-bottom: 1px solid var(--color-secondary-dark);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-secondary-dark);
+}
+
+.devDiaryMeta b {
+    font-weight: 400;
+    margin-right: 6px;
+}
+
+.devDiaryHero {
+    margin-top: 40px;
+}
+
+.devDiaryCaption {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-secondary-dark);
+    margin-top: 12px;
+}
+
+.devDiaryProse {
+    max-width: 720px;
+    margin: 60px auto 0;
+}
+
+.devDiaryProse p {
+    font-size: 20px;
+    line-height: 1.65;
+}
+
+.devDiaryProse p + p {
+    margin-top: 22px;
+}
+
+.devDiaryProse h2 {
+    margin: 56px 0 18px;
+    letter-spacing: 0.01em;
+}
+
+.devDiaryDropcap::first-letter {
+    font-family: var(--font-display);
+    font-size: 96px;
+    line-height: 0.8;
+    float: left;
+    padding: 8px 12px 0 0;
+    color: var(--color-fg);
+}
+
+.devDiaryQuote {
+    margin: 40px 0;
+    padding: 10px 0 10px 30px;
+    border-left: 3px solid var(--color-red);
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--color-fg);
+}
+
+.devDiaryCite {
+    display: block;
+    margin-top: 14px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-secondary-dark);
+}
+
+.devDiaryFigure {
+    margin: 40px 0;
+}

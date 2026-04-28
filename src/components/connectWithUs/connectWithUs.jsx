@@ -22,7 +22,7 @@ function ConnectWithUs({
 
     return (
         // <section className="stageDoors">
-            <div className="playbill">
+            <div className="playbill paperBackground">
                 <div className="bloodTl"></div>
                 <h1 className="textCenter colorBlack">{title}</h1>
                 <div className="flexContainer flex1 playbillDoors">
