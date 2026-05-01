@@ -1,28 +1,23 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import './hero.css'
 import './glitchEffect.css'
 import coverPhoto from '../../media/images/coverphoto.png'
 import ScratchButton from '../scratchButton/scratchButton'
 import CrtOverlay from '../crtOverlay/crtOverlay'
+import { supabase } from '../../lib/supabase'
 
 function Hero() {
-    const [deathCount, setDeathCount] = useState(3132849);
-    const [isTicking, setIsTicking] = useState(false);
-
-    const scheduleNextTick = useCallback(() => {
-        const delay = (Math.random() * 9 + 1) * 1000;
-        return setTimeout(() => {
-            setDeathCount(prev => prev + 1);
-            setIsTicking(true);
-            setTimeout(() => setIsTicking(false), 300);
-            scheduleNextTick();
-        }, delay);
-    }, []);
+    const [deathCount, setDeathCount] = useState(null);
 
     useEffect(() => {
-        const timeout = scheduleNextTick();
-        return () => clearTimeout(timeout);
-    }, [scheduleNextTick]);
+        supabase
+            .from('deaths')
+            .select('count')
+            .single()
+            .then(({ data }) => {
+                if (data) setDeathCount(Number(data.count));
+            });
+    }, []);
 
     return (
         <section className="hero" style={{ backgroundImage: `url(${coverPhoto})` }}>
@@ -32,7 +27,7 @@ function Hero() {
                     <div className="heroCenter">
                         <div className="heroAbove">Here lies:</div>
                         <div className="glitchEffect heroH1">
-                            <h1 className={`black${isTicking ? ' ticking' : ''}`}>{deathCount.toLocaleString()}</h1>
+                            <h1 className="black">{deathCount !== null ? deathCount.toLocaleString() : ''}</h1>
                         </div>
                         <div className="heroBelow">
                             <p><span className="whiteText">executed contestants.</span> Will you be next?</p>
