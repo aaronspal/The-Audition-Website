@@ -1,4 +1,11 @@
+import { useState, useEffect } from 'react'
 import './recentSuperstars.css'
+import { supabase } from '../../lib/supabase'
+
+function formatWinnerDate(isoString) {
+    const d = new Date(isoString);
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+}
 
 const DEFAULT_STARS = [
     { name: "Marigold",  serial: "41927", date: "12-MAR-2026", status: "decommissioned" },
@@ -12,11 +19,30 @@ const DEFAULT_STARS = [
 ];
 
 function RecentSuperstars({
-    stars = DEFAULT_STARS,
     eyebrow = "The Audition · Roll Call",
     title = "Recent Superstars",
     subtitle = "Honoring those who the investors most adored",
 }) {
+    const [stars, setStars] = useState(DEFAULT_STARS);
+
+    useEffect(() => {
+        supabase
+            .from('winners')
+            .select('id, name, created_at')
+            .order('created_at', { ascending: false })
+            .limit(20)
+            .then(({ data }) => {
+                if (data && data.length > 0) {
+                    setStars(data.map(w => ({
+                        name: w.name,
+                        serial: w.id.replace(/-/g, '').slice(-5).toUpperCase(),
+                        date: formatWinnerDate(w.created_at),
+                        status: 'active',
+                    })));
+                }
+            });
+    }, []);
+
     return (
         <section className="recentSuperstars">
             <div className="superStarHeader paperBackground textCenter">
