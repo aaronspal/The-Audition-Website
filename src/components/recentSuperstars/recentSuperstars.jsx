@@ -30,7 +30,7 @@ function RecentSuperstars({
             .from('winners')
             .select('id, name, created_at')
             .order('created_at', { ascending: false })
-            .limit(20)
+            .limit(8)
             .then(({ data }) => {
                 if (data && data.length > 0) {
                     setStars(data.map(w => ({
