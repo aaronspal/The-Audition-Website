@@ -19,9 +19,7 @@ const DEFAULT_STARS = [
 ];
 
 function RecentSuperstars({
-    eyebrow = "The Audition · Roll Call",
     title = "Recent Superstars",
-    subtitle = "Honoring those who the investors most adored",
 }) {
     const [stars, setStars] = useState(DEFAULT_STARS);
 
@@ -45,10 +43,8 @@ function RecentSuperstars({
 
     return (
         <section className="recentSuperstars">
-            <div className="superStarHeader paperBackground textCenter">
-                <div className="superStarEyebrow monoText greenInkText">{eyebrow}</div>
-                <h2 className="titleFont colorBlack">{title}</h2>
-                <div className="superStarSub monoText greenInkText">{subtitle}</div>
+            <div className="superStarHeader textCenter">
+                <h2 className="superStarLabel monoText">{title}</h2>
             </div>
 
             <div className="superStarBoard">

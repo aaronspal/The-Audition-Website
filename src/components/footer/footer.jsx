@@ -1,4 +1,5 @@
 import './footer.css'
+import footerBg from '../../media/images/footer-bg.jpg'
 import discordIcon from '../../media/icons/socials/Discord.png'
 import instagramIcon from '../../media/icons/socials/Instagram.png'
 import tiktokIcon from '../../media/icons/socials/TikTok.png'
@@ -6,7 +7,7 @@ import steamIcon from '../../media/icons/socials/Steam.png'
 
 function Footer() {
     return (
-        <footer className="container footer">
+        <footer className="container footer" style={{ backgroundImage: `url(${footerBg})` }}>
             <section className="flexContainer">
                 <div className="w30">
                     <h2 className="titleFont">The Audition</h2>

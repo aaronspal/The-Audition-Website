@@ -47,15 +47,21 @@
 .superStarHeader {
     position: relative;
     z-index: 2;
-    max-width: 720px;
     margin: 0 auto 50px;
-    padding: 22px 60px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
-    transform: rotate(-0.6deg);
 }
 
-.superStarHeader::before,
-.superStarHeader::after,
+.superStarLabel {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #111111;
+    font-size: 38px;
+    letter-spacing: 0.04em;
+    padding: 8px 28px;
+    margin: 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.55);
+    transform: rotate(-1.5deg);
+}
+
 .superStarCard::before {
     content: "";
     position: absolute;
@@ -63,21 +69,6 @@
     background: var(--thumbtack);
     box-shadow: var(--thumbtackShadow);
     z-index: 2;
-}
-
-.superStarHeader::before { left: 20px; }
-.superStarHeader::after { right: 20px; }
-
-.superStarEyebrow {
-    font-size: 10px;
-    letter-spacing: 0.32em;
-    margin-bottom: 6px;
-}
-
-.superStarSub {
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    margin-top: 8px;
 }
 
 .superStarBoard {

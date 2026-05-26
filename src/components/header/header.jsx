@@ -1,17 +1,29 @@
 import './header.css'
 import logo from '../../media/icons/LogoFullTransparent.png'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import ScratchButton from '../scratchButton/scratchButton'
 
 function Header() {
+    const navigate = useNavigate();
     const location = useLocation();
 
     const navItems = [
-        { name: 'About', path: '/about' },
-        { name: 'News', path: '/news' },
-        { name: 'Community', path: '/community' },
-        { name: 'Download', path: 'https://bhranthrok.itch.io/the-audition-v0', external: true },
+        { name: 'About',     hash: 'about' },
+        { name: 'News',      hash: 'news' },
+        { name: 'Community', hash: 'community' },
+        { name: 'Preview',   path: 'https://bhranthrok.itch.io/the-audition-v0', external: true },
     ];
+
+    function scrollToSection(hash) {
+        if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+                document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        } else {
+            document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 
     return (
         <header className="flexContainer alignCenter container header g10">
@@ -23,7 +35,7 @@ function Header() {
                 {navItems.map((item) =>
                     item.external ? (
                         <a
-                            key={item.path}
+                            key={item.name}
                             href={item.path}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -32,13 +44,13 @@ function Header() {
                             {item.name}
                         </a>
                     ) : (
-                        <Link
-                            key={item.path}
-                            to={item.path}
-                            className={`navLink ${location.pathname === item.path ? 'active' : ''}`}
+                        <button
+                            key={item.name}
+                            onClick={() => scrollToSection(item.hash)}
+                            className="navLink navLinkButton"
                         >
                             {item.name}
-                        </Link>
+                        </button>
                     )
                 )}
             </nav>

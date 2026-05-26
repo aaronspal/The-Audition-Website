@@ -1,6 +1,9 @@
 .footer {
-    background-color: var(--color-red);
-    color: var(--color-bg);
+    background-color: #616161;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: hard-light;
+    /*color: var(--color-bg);*/
     padding-top: 40px;
     padding-bottom: 40px;
     position: relative;
@@ -8,7 +11,7 @@
 }
 
 .footer p {
-    color: var(--color-bg);
+    /*color: var(--color-fg);*/
     margin: 0;
 }
 

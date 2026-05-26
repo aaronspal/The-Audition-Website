@@ -50,7 +50,7 @@
 
 /* CSS Variables */
 :root {
-  --color-bg: black;
+  --color-bg: #000000;
   --color-fg: #ffffff;
   --color-secondary: #252525;
   --color-red: #db2c2c;
