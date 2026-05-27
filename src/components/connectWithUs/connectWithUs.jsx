@@ -1,29 +1,18 @@
 import './connectWithUs.css'
-import discordIcon from '../../media/icons/socials/Discord.png'
-import instagramIcon from '../../media/icons/socials/Instagram.png'
-import tiktokIcon from '../../media/icons/socials/TikTok.png'
-import steamIcon from '../../media/icons/socials/Steam.png'
+import { socialLinks } from '../../data/socialLinks'
 
 function ConnectWithUs({
-    links,
+    links = socialLinks,
     title = "Connect With Us",
 } = {}) {
-    const defaultLinks = [
-        { name: "Discord",   icon: discordIcon,   href: "#" },
-        { name: "Instagram", icon: instagramIcon, href: "#" },
-        { name: "TikTok",    icon: tiktokIcon,    href: "#" },
-        { name: "Steam",     icon: steamIcon,     href: "#" },
-    ];
-    const list = links || defaultLinks;
-
     return (
         <div className="socialMedia">
-            <h2 className="titleFont textCenter">{title}</h2>
+            <h2 className="titleFont textCenter marginBottom">{title}</h2>
             <div className="gridContainer4x">
-                {list.map((l, i) => (
+                {links.map((l, i) => (
                     <a key={i} className="flexContainer flexColumn alignCenter socialMediaLink" href={l.href || "#"}>
-                        <img src={l.icon} className="socialMediaIcon" alt=""/>
-                        <p className="monoText">{l.name}</p>
+                        <img src={l.iconWhite} className="socialMediaIcon" alt=""/>
+                        {/*<p className="monoText">{l.name}</p>*/}
                     </a>
                 ))}
             </div>

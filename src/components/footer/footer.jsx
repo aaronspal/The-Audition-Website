@@ -1,8 +1,5 @@
 import './footer.css'
-import discordIcon from '../../media/icons/socials/Discord.png'
-import instagramIcon from '../../media/icons/socials/Instagram.png'
-import tiktokIcon from '../../media/icons/socials/TikTok.png'
-import steamIcon from '../../media/icons/socials/Steam.png'
+import { socialLinks } from '../../data/socialLinks'
 
 function Footer() {
     return (
@@ -11,18 +8,11 @@ function Footer() {
                 <div className="w50">
                     <h2 className="titleFont">The Audition</h2>
                     <div className="flexContainer g10 footerSocials">
-                        <a href="#" aria-label="Discord">
-                            <img src={discordIcon} alt="Discord" className="socialIcon"/>
-                        </a>
-                        <a href="#" aria-label="Instagram">
-                            <img src={instagramIcon} alt="Instagram" className="socialIcon"/>
-                        </a>
-                        <a href="#" aria-label="TikTok">
-                            <img src={tiktokIcon} alt="TikTok" className="socialIcon"/>
-                        </a>
-                        <a href="#" aria-label="Steam">
-                            <img src={steamIcon} alt="Steam" className="socialIcon"/>
-                        </a>
+                        {socialLinks.map((l, i) => (
+                            <a key={i} href={l.href || "#"} aria-label={l.name}>
+                                <img src={l.iconBlack} alt={l.name} className="socialIcon"/>
+                            </a>
+                        ))}
                     </div>
                 </div>
                 <div className="flexContainer flexColumn w50 bold alignEnd textRight">

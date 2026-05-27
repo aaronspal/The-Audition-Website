@@ -2,7 +2,7 @@
     position: relative;
     background-color: var(--color-bg);
     background-image:
-        linear-gradient(rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0.93)),
+        linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
         url("../../media/images/scratchTexture.jpg");
     background-repeat: repeat;
     background-blend-mode: multiply, screen;

@@ -1,43 +1,63 @@
 .socialMedia {
     --divider: rgba(255, 255, 255, 0.25);
-    padding: 80px max(50px, calc((100vw - 1200px) / 2));
+    padding: 80px 50px;
+}
+
+.socialMedia .gridContainer4x {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .socialMediaLink {
+    position: relative;
     padding: 20px 10px;
     text-align: center;
     color: inherit;
     text-decoration: none;
-    border-right: 1px solid var(--divider);
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.socialMediaLink:last-child {
-    border-right: none;
+/* Bullet hole sits behind each icon (its own layer, centered on the icon).
+   Each link gets a unique bullet hole so no two look identical. */
+.socialMediaLink::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    transform: translateX(-50%);
+    background: no-repeat center / contain;
+    pointer-events: none;
 }
 
+.socialMediaLink:nth-child(1)::before { background-image: url("../../media/images/bullet-hole-1.png"); }
+.socialMediaLink:nth-child(2)::before { background-image: url("../../media/images/bullet-hole-2.png"); }
+.socialMediaLink:nth-child(3)::before { background-image: url("../../media/images/bullet-hole-3.png"); }
+.socialMediaLink:nth-child(4)::before { background-image: url("../../media/images/bullet-hole-4.png"); }
+
+.socialMediaLink:nth-child(1) { transform: translateY(-2px); }
+.socialMediaLink:nth-child(2) { transform: translateY(3px); }
+.socialMediaLink:nth-child(3) { transform: translateY(-3px); }
+.socialMediaLink:nth-child(4) { transform: translateY(-3px); }
+
 .socialMediaLink:hover {
-    background: rgba(255, 255, 255, 0.07);
-    transform: translateY(-2px);
+    opacity: 0.9;
+    transition: 0.2s ease;
 }
 
 .socialMediaIcon {
+    position: relative;
+    z-index: 1;
     width: 56px;
     height: 56px;
-    margin-bottom: 14px;
-    /* TEMP: invert(1) flips the black icons to white; replace with proper white assets */
-    filter: invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    /* Top margin seats the icon in the center of the bullet hole behind it */
+    margin: 34px 0 48px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .socialMedia .gridContainer4x {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .socialMediaLink:nth-child(2) {
-        border-right: none;
-    }
-    .socialMediaLink:nth-child(1),
-    .socialMediaLink:nth-child(2) {
-        border-bottom: 1px solid var(--divider);
     }
 }

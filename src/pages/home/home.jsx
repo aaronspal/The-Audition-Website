@@ -5,6 +5,7 @@ import HomeAbout from '../../components/homeAbout/homeAbout'
 // import News from '../../components/news/news'
 import RecentSuperstars from '../../components/recentSuperstars/recentSuperstars'
 import ConnectWithUs from '../../components/connectWithUs/connectWithUs'
+import bulletHole from '../../media/images/bullet-hole.png'
 
 export function Component() {
     return (
