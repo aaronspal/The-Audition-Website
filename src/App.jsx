@@ -3,15 +3,20 @@ import './styles/flexgrid.css';
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
 import ScrollToTop from "./components/ScrollToTop";
+import NewsTerminal from "./components/newsTerminal/newsTerminal";
+import { NewsTerminalProvider } from "./context/newsTerminalContext";
 
 function App() {
   return (
-    <div className="App">
-        <ScrollToTop />
-        <Header/>
-        <Outlet/>
-        <Footer/>
-    </div>
+    <NewsTerminalProvider>
+      <div className="App">
+          <ScrollToTop />
+          <Header/>
+          <Outlet/>
+          <Footer/>
+          <NewsTerminal/>
+      </div>
+    </NewsTerminalProvider>
   );
 }
 

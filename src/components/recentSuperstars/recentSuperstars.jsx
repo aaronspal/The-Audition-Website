@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './recentSuperstars.css'
 import { supabase } from '../../lib/supabase'
-import RecentSuperstarsDebug from './debug/recentSuperstarsDebug'
+// import RecentSuperstarsDebug from './debug/recentSuperstarsDebug'
 
 function formatWinnerDate(isoString) {
     const d = new Date(isoString);
@@ -27,21 +27,29 @@ function RecentSuperstars({
     const hasLoaded = useRef(false);
 
     useEffect(() => {
+        const lastSnapshot = { current: '' };
+
         async function fetchWinners(isLiveUpdate) {
             const { data } = await supabase
                 .from('winners')
                 .select('id, name, created_at')
                 .order('created_at', { ascending: false })
                 .limit(8);
-            if (data && data.length > 0) {
+            if (!data) return;
+
+            const snapshot = JSON.stringify(data);
+            const changed = snapshot !== lastSnapshot.current;
+            lastSnapshot.current = snapshot;
+
+            if (data.length > 0) {
                 setStars(data.map(w => ({
                     name: w.name,
                     serial: w.id.replace(/-/g, '').slice(-5).toUpperCase(),
                     date: formatWinnerDate(w.created_at),
                 })));
             }
-            // Only flicker for live updates, not the initial load
-            if (isLiveUpdate && hasLoaded.current) {
+            // Flicker only when data actually changed after the first load
+            if (isLiveUpdate && changed && hasLoaded.current) {
                 setUpdateKey(k => k + 1);
             }
             hasLoaded.current = true;
@@ -49,6 +57,7 @@ function RecentSuperstars({
 
         fetchWinners(false);
 
+        // Realtime updates (requires Realtime enabled for the table in Supabase)
         const channel = supabase
             .channel('winners-changes')
             .on(
@@ -56,9 +65,19 @@ function RecentSuperstars({
                 { event: '*', schema: 'public', table: 'winners' },
                 () => fetchWinners(true)
             )
-            .subscribe();
+            .subscribe((status) => {
+                if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+                    console.warn('[RecentSuperstars] realtime unavailable, relying on polling. status:', status);
+                }
+            });
 
-        return () => { supabase.removeChannel(channel); };
+        // Polling fallback so the table stays fresh even if realtime is off
+        const poll = setInterval(() => fetchWinners(true), 20000);
+
+        return () => {
+            supabase.removeChannel(channel);
+            clearInterval(poll);
+        };
     }, []);
 
     return (

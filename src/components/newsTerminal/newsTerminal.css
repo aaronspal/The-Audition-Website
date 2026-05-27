@@ -1,0 +1,106 @@
+.newsTerminalBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.newsTerminal {
+    position: relative;
+    width: min(560px, 90vw);
+    background-color: #151915;
+    border: 1px solid #2e6e0b;
+    box-shadow:
+        0 0 2px rgba(255, 255, 255, 0.8),
+        0 0 24px rgba(255, 255, 255, 0.2),
+        0 12px 40px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+}
+
+.newsTerminalScreen {
+    position: relative;
+    padding: 10px 20px;
+    font-family: "DigitTech16", monospace;
+    color: var(--color-green);
+    text-transform: uppercase;
+}
+
+/* CRT scanline overlay (screen area only, not the white title bar) */
+.newsTerminalScreen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 0, 0, 0.15) 3px,
+        rgba(0, 0, 0, 0.15) 4px
+    );
+    z-index: 2;
+}
+
+.newsTerminalLine {
+    margin: 0 0 6px;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+}
+
+.newsTerminalPrompt {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.newsTerminalDenied {
+    margin: 0;
+    color: #ff2b2b;
+    animation: newsTerminalDenyFlash 0.375s steps(1, end) 4;
+}
+
+@keyframes newsTerminalDenyFlash {
+    50% { opacity: 0.15; }
+}
+
+.newsTerminalForm {
+    margin: 0;
+}
+
+.newsTerminalInputWrap {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.newsTerminalInput {
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-family: "DigitTech16", monospace;
+    font-size: 20px;
+    letter-spacing: 0.3em;
+    color: var(--color-green);
+    /* hide the native caret; the underscore below stands in for it.
+       width is set inline to track the typed length so the underscore
+       caret always sits just after the text. min-width keeps the empty
+       field clickable. */
+    caret-color: transparent;
+    min-width: 1px;
+}
+
+.newsTerminalCaret {
+    font-family: "DigitTech16", monospace;
+    font-size: 20px;
+    color: var(--color-green);
+    animation: newsTerminalCaretBlink 1s steps(1, end) infinite;
+}
+
+@keyframes newsTerminalCaretBlink {
+    50% { opacity: 0; }
+}

@@ -32,7 +32,7 @@ function Hero() {
                         <div className="heroBelow">
                             <p><span className="whiteText">executed contestants.</span> Will you be next?</p>
                             <div className="zIndex10 heroCTA">
-                                <ScratchButton href="/download">Play Itch Preview</ScratchButton>
+                                <ScratchButton href="https://bhranthrok.itch.io/the-audition-v0">Play Itch Preview</ScratchButton>
                             </div>
                         </div>
                     </div>

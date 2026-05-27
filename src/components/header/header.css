@@ -18,7 +18,7 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     mask-image: linear-gradient(to bottom, black, transparent);
-    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+    /*-webkit-mask-image: -webkit-linear-gradient(top, black, transparent);*/
     z-index: -1;
 }
 
@@ -61,6 +61,15 @@
 
 .navLink:hover {
     opacity: 0.7;
+}
+
+.navLockIcon {
+    display: inline-block;
+    height: 1em;
+    width: auto;
+    margin-right: 4px;
+    margin-bottom: -1px;
+    vertical-align: -0.1em;
 }
 
 .headerCta {
