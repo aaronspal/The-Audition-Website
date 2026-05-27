@@ -1,1 +1,0 @@
-var e=`/assets/news1-ClieFdTE.png`;export{e as t};
