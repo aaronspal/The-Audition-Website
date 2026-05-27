@@ -1,17 +1,33 @@
 .footer {
-    background-color: #616161;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: hard-light;
-    /*color: var(--color-bg);*/
-    padding-top: 40px;
+    color: var(--color-bg);
+    padding-top: 70px;
     padding-bottom: 40px;
     position: relative;
     box-shadow: 0 -8px 16px rgba(0, 0, 0, .1);
 }
 
+.footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: var(--color-bg);
+    mask-image: url("../../media/images/ripped-edge-top.png");
+    -webkit-mask-image: url("../../media/images/ripped-edge-top.png");
+    mask-size: 100% auto;
+    -webkit-mask-size: 100% auto;
+    mask-position: bottom center;
+    -webkit-mask-position: bottom center;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    transform: scaleY(-1);
+    pointer-events: none;
+}
+
 .footer p {
-    /*color: var(--color-fg);*/
+    color: var(--color-bg);
     margin: 0;
 }
 

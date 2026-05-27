@@ -1,5 +1,4 @@
 import './footer.css'
-import footerBg from '../../media/images/footer-bg.jpg'
 import discordIcon from '../../media/icons/socials/Discord.png'
 import instagramIcon from '../../media/icons/socials/Instagram.png'
 import tiktokIcon from '../../media/icons/socials/TikTok.png'
@@ -7,9 +6,9 @@ import steamIcon from '../../media/icons/socials/Steam.png'
 
 function Footer() {
     return (
-        <footer className="container footer" style={{ backgroundImage: `url(${footerBg})` }}>
+        <footer className="container footer paperBackground">
             <section className="flexContainer">
-                <div className="w30">
+                <div className="w50">
                     <h2 className="titleFont">The Audition</h2>
                     <div className="flexContainer g10 footerSocials">
                         <a href="#" aria-label="Discord">
@@ -26,17 +25,17 @@ function Footer() {
                         </a>
                     </div>
                 </div>
-                <div className="flexContainer w70 g20">
-                    <div className="w25">
+                <div className="flexContainer flexColumn w50 bold alignEnd textRight">
+                    <div>
                         About
                     </div>
-                    <div className="w25">
+                    <div>
                         News
                     </div>
-                    <div className="w25">
+                    <div>
                         Community
                     </div>
-                    <div className="w25">
+                    <div>
                         Download
                     </div>
                 </div>

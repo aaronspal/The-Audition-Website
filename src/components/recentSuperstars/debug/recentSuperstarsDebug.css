@@ -1,0 +1,5 @@
+/* Dev-only simulate button (hidden in production builds) */
+.superStarDevSim {
+    display: block;
+    margin: 40px auto 0;
+}

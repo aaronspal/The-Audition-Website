@@ -1,20 +1,9 @@
-.homeDevDiary {
+.homePage {
     position: relative;
-    overflow: hidden;
-    margin: 100px 0;
-}
-
-.homeDevDiary::before {
-    content: "";
-    position: absolute;
-    top: -80px;
-    left: -60px;
-    width: 450px;
-    height: 350px;
-    background: url("../../media/images/bloodsplatter.png") no-repeat center;
-    background-size: contain;
-    /*mix-blend-mode: multiply;*/
-    opacity: 0.3;
-    pointer-events: none;
-    transform: rotate(45deg);
+    background-color: var(--color-bg);
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.93), rgba(0, 0, 0, 0.93)),
+        url("../../media/images/scratchTexture.jpg");
+    background-repeat: repeat;
+    background-blend-mode: multiply, screen;
 }

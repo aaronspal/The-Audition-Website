@@ -1,61 +1,97 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './recentSuperstars.css'
 import { supabase } from '../../lib/supabase'
+import RecentSuperstarsDebug from './debug/recentSuperstarsDebug'
 
 function formatWinnerDate(isoString) {
     const d = new Date(isoString);
-    return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
 }
 
 const DEFAULT_STARS = [
-    { name: "Marigold",  serial: "41927", date: "12-MAR-2026", status: "decommissioned" },
-    { name: "Atlas",     serial: "08851", date: "04-APR-2026", status: "renewed" },
-    { name: "Penelope",  serial: "00614", date: "18-APR-2026", status: "active" },
-    { name: "Zephyr",    serial: "13302", date: "22-FEB-2026", status: "replaced" },
-    { name: "Carmen",    serial: "20188", date: "09-APR-2026", status: "active" },
-    { name: "Vega",      serial: "04473", date: "27-JAN-2026", status: "decommissioned" },
-    { name: "Lou",       serial: "35540", date: "15-APR-2026", status: "active" },
-    { name: "Orion",     serial: "09926", date: "01-APR-2026", status: "renewed" },
+    { name: "Marigold",  serial: "41927", date: "12/03/2026" },
+    { name: "Atlas",     serial: "08851", date: "04/04/2026" },
+    { name: "Penelope",  serial: "00614", date: "18/04/2026" },
+    { name: "Zephyr",    serial: "13302", date: "22/02/2026" },
+    { name: "Carmen",    serial: "20188", date: "09/04/2026" },
+    { name: "Vega",      serial: "04473", date: "27/01/2026" },
+    { name: "Lou",       serial: "35540", date: "15/04/2026" },
+    { name: "Orion",     serial: "09926", date: "01/04/2026" },
 ];
 
 function RecentSuperstars({
     title = "Recent Superstars",
 }) {
     const [stars, setStars] = useState(DEFAULT_STARS);
+    const [updateKey, setUpdateKey] = useState(0);
+    const hasLoaded = useRef(false);
 
     useEffect(() => {
-        supabase
-            .from('winners')
-            .select('id, name, created_at')
-            .order('created_at', { ascending: false })
-            .limit(8)
-            .then(({ data }) => {
-                if (data && data.length > 0) {
-                    setStars(data.map(w => ({
-                        name: w.name,
-                        serial: w.id.replace(/-/g, '').slice(-5).toUpperCase(),
-                        date: formatWinnerDate(w.created_at),
-                        status: 'active',
-                    })));
-                }
-            });
+        async function fetchWinners(isLiveUpdate) {
+            const { data } = await supabase
+                .from('winners')
+                .select('id, name, created_at')
+                .order('created_at', { ascending: false })
+                .limit(8);
+            if (data && data.length > 0) {
+                setStars(data.map(w => ({
+                    name: w.name,
+                    serial: w.id.replace(/-/g, '').slice(-5).toUpperCase(),
+                    date: formatWinnerDate(w.created_at),
+                })));
+            }
+            // Only flicker for live updates, not the initial load
+            if (isLiveUpdate && hasLoaded.current) {
+                setUpdateKey(k => k + 1);
+            }
+            hasLoaded.current = true;
+        }
+
+        fetchWinners(false);
+
+        const channel = supabase
+            .channel('winners-changes')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'winners' },
+                () => fetchWinners(true)
+            )
+            .subscribe();
+
+        return () => { supabase.removeChannel(channel); };
     }, []);
 
     return (
         <section className="recentSuperstars">
             <div className="superStarHeader textCenter">
-                <h2 className="superStarLabel monoText">{title}</h2>
+                <h2 className="superStarLabel labelMaker">{title}</h2>
             </div>
 
-            <div className="superStarBoard">
-                {stars.map((s, i) => (
-                    <div key={s.serial + "-" + i} className="superStarCard paperBackground textCenter" data-status={s.status}>
-                        <div className="superStarName colorBlack">{s.name}</div>
-                        <div className="superStarDate monoText greenInkText">{s.date}</div>
-                        <div className="superStarStamp monoText">{s.serial}</div>
-                    </div>
-                ))}
-            </div>
+            <table className="superStarTable sevenSegment">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody key={updateKey} className={updateKey > 0 ? 'tableUpdating' : undefined}>
+                    {stars.map((s, i) => (
+                        <tr key={s.serial + "-" + i}>
+                            <td>{s.serial}</td>
+                            <td>{s.name}</td>
+                            <td>{s.date}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+            {/*<RecentSuperstarsDebug*/}
+            {/*    onSimulate={(newStar) => {*/}
+            {/*        setStars(prev => [newStar, ...prev].slice(0, 8));*/}
+            {/*        setUpdateKey(k => k + 1);*/}
+            {/*    }}*/}
+            {/*/>*/}
         </section>
     );
 }

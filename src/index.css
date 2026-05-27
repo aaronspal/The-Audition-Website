@@ -43,8 +43,8 @@
 }
 
 @font-face {
-  font-family: "Segment7";
-  src: url("./media/fonts/7segment.woff") format("woff");
+  font-family: "DigitTech16";
+  src: url("./media/fonts/DigitTech16-Regular.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -146,6 +146,26 @@ hr {
 
 .monoText {
   font-family: var(--font-mono);
+}
+
+.labelMaker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #111111;
+  padding: 8px 34px 0;
+  background-color: #e8e6e0;
+  background-image: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.85) 42%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  clip-path: polygon(0.5% 0, 100% 0, 99.5% 100%, 0 100%);
+  text-shadow: 0 0.03em 0.03em rgba(255, 255, 255, 0.9), 0 0.06em 0.06em rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0 6px 12px rgba(32, 0, 0, 0.45)) drop-shadow(0 12px 26px rgba(66, 0, 0, 0.3));
 }
 
 /* Colors */
@@ -274,7 +294,7 @@ ul, ol, li {
 }
 
 .sevenSegment {
-  font-family: "Segment7", monospace;
+  font-family: "DigitTech16", monospace;
 }
 
 .signoffText {

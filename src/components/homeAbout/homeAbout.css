@@ -4,7 +4,6 @@
 
 .rainbowWord {
     display: inline-block;
-    cursor: default;
 }
 
 .rainbowWord:hover {

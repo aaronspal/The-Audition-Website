@@ -113,6 +113,10 @@
     align-items: center;
 }
 
+.alignEnd {
+    align-items: flex-end;
+}
+
 .rowReverse {
     flex-direction: row-reverse;
 }
