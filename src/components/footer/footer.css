@@ -14,15 +14,18 @@
     right: 0;
     height: 50px;
     background-color: var(--color-bg);
-    mask-image: url("../../media/images/ripped-edge-top.png");
-    -webkit-mask-image: url("../../media/images/ripped-edge-top.png");
-    mask-size: 100% auto;
-    -webkit-mask-size: 100% auto;
-    mask-position: bottom center;
-    -webkit-mask-position: bottom center;
+    /* Pre-flipped image: the tear is baked into the bottom edge, so NO
+       scaleY(-1) transform is needed. Safari/WebKit applied that transform to
+       the pseudo-element inconsistently (tear ended up on the wrong side),
+       so flipping the asset itself makes both engines render identically.
+       100% 100% stretches the mask to fill the box (no per-engine auto-height
+       differences). */
+    mask-image: url("../../media/images/ripped-edge-bottom.png");
+    -webkit-mask-image: url("../../media/images/ripped-edge-bottom.png");
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
-    transform: scaleY(-1);
     pointer-events: none;
 }
 

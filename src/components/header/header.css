@@ -15,11 +15,15 @@
     content: "";
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     mask-image: linear-gradient(to bottom, black, transparent);
-    /*-webkit-mask-image: -webkit-linear-gradient(top, black, transparent);*/
     z-index: -1;
+}
+
+/* Separate rule so the CSS minifier doesn't drop the standard property
+   when collapsing it against the -webkit- prefixed one above. */
+.header::before {
+    backdrop-filter: blur(4px);
 }
 
 .headerLogo {
