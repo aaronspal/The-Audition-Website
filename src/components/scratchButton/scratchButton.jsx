@@ -20,7 +20,7 @@ function ScratchButton({ children, onClick, href, mobile = false }) {
     );
 
     if (href) {
-        return <a href={href} className="scratchLink">{content}</a>;
+        return <a href={href} target="_blank" rel="noopener noreferrer" className="scratchLink">{content}</a>;
     }
 
     return <button onClick={onClick} className="scratchLink">{content}</button>;
