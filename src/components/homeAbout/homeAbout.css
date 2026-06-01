@@ -1,5 +1,6 @@
 .homeAboutContent {
     margin: 0 auto;
+    max-width: 800px;
 }
 
 .rainbowWord {
@@ -61,4 +62,10 @@
     /*mix-blend-mode: multiply;*/
     opacity: 0.4;
     pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .homeAbout .homeAboutContent {
+        width: 85%;
+    }
 }

@@ -28,12 +28,23 @@ function Header() {
         }
     }
 
+    function scrollToTop() {
+        if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 100);
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
     return (
         <header className="flexContainer alignCenter container header g10">
-            <Link to="/" className="headerLogo">
+            <Link to="/" className="headerLogo" onClick={scrollToTop}>
                 <img src={logo} alt="The Audition" className="logo" />
             </Link>
-            <h2 className="titleFont">The Audition</h2>
+            <h2 className="titleFont headerTitle" onClick={scrollToTop}>The Audition</h2>
             <nav className="flexContainer g40 headerNav">
                 {navItems.map((item) =>
                     item.external ? (
@@ -58,8 +69,11 @@ function Header() {
                     )
                 )}
             </nav>
-            <div className="headerCta">
-                <ScratchButton href="https://bhranthrok.itch.io/the-audition-v0">Wishlist on Steam</ScratchButton>
+            <div className="headerCta headerCtaDesktop">
+                <ScratchButton href="https://store.steampowered.com/app/4687550/The_Audition/">Wishlist on Steam</ScratchButton>
+            </div>
+            <div className="headerCta headerCtaMobile">
+                <ScratchButton href="https://bhranthrok.itch.io/the-audition-v0" mobile>Wishlist on Steam</ScratchButton>
             </div>
         </header>
     );

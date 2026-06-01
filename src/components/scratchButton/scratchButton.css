@@ -45,3 +45,23 @@
     letter-spacing: 2px;
     text-transform: uppercase;
 }
+
+.scratchButtonMobile {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+}
+
+.scratchBgMobile {
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-position: center;
+    -webkit-mask-position: center;
+}
+
+.scratchSteamIcon {
+    position: relative;
+    z-index: 1;
+    width: 75%;
+    height: auto;
+}

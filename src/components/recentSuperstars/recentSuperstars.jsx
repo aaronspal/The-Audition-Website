@@ -3,20 +3,38 @@ import './recentSuperstars.css'
 import { supabase } from '../../lib/supabase'
 // import RecentSuperstarsDebug from './debug/recentSuperstarsDebug'
 
-function formatWinnerDate(isoString) {
+function formatWinnerDate(isoString, short = false) {
     const d = new Date(isoString);
-    return d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    if (short) {
+        return d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit' }).replace(/\//g, '-');
+    }
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\//g, '-');
+}
+
+function useNarrowScreen() {
+    const [narrow, setNarrow] = useState(() => window.matchMedia('(max-width: 400px)').matches);
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 400px)');
+        const handler = (e) => setNarrow(e.matches);
+        mq.addEventListener('change', handler);
+        return () => mq.removeEventListener('change', handler);
+    }, []);
+    return narrow;
+}
+
+function padId(n) {
+    return String(n).padStart(5, '0');
 }
 
 const DEFAULT_STARS = [
-    { name: "Marigold",  serial: "41927", date: "12/03/2026" },
-    { name: "Atlas",     serial: "08851", date: "04/04/2026" },
-    { name: "Penelope",  serial: "00614", date: "18/04/2026" },
-    { name: "Zephyr",    serial: "13302", date: "22/02/2026" },
-    { name: "Carmen",    serial: "20188", date: "09/04/2026" },
-    { name: "Vega",      serial: "04473", date: "27/01/2026" },
-    { name: "Lou",       serial: "35540", date: "15/04/2026" },
-    { name: "Orion",     serial: "09926", date: "01/04/2026" },
+    { name: "Marigold",  serial: "00012", date: "12-03-2026" },
+    { name: "Atlas",     serial: "00011", date: "04-04-2026" },
+    { name: "Penelope",  serial: "00010", date: "18-04-2026" },
+    { name: "Zephyr",    serial: "00009", date: "22-02-2026" },
+    { name: "Carmen",    serial: "00008", date: "09-04-2026" },
+    { name: "Vega",      serial: "00007", date: "27-01-2026" },
+    { name: "Lou",       serial: "00006", date: "15-04-2026" },
+    { name: "Orion",     serial: "00005", date: "01-04-2026" },
 ];
 
 function RecentSuperstars({
@@ -25,6 +43,7 @@ function RecentSuperstars({
     const [stars, setStars] = useState(DEFAULT_STARS);
     const [updateKey, setUpdateKey] = useState(0);
     const hasLoaded = useRef(false);
+    const narrow = useNarrowScreen();
 
     useEffect(() => {
         const lastSnapshot = { current: '' };
@@ -32,7 +51,7 @@ function RecentSuperstars({
         async function fetchWinners(isLiveUpdate) {
             const { data } = await supabase
                 .from('winners')
-                .select('id, name, created_at')
+                .select('id, name, created_at, contestant_number')
                 .order('created_at', { ascending: false })
                 .limit(8);
             if (!data) return;
@@ -41,13 +60,14 @@ function RecentSuperstars({
             const changed = snapshot !== lastSnapshot.current;
             lastSnapshot.current = snapshot;
 
-            if (data.length > 0) {
-                setStars(data.map(w => ({
-                    name: w.name,
-                    serial: w.id.replace(/-/g, '').slice(-5).toUpperCase(),
-                    date: formatWinnerDate(w.created_at),
-                })));
-            }
+            const mapped = data.map(w => ({
+                name: w.name,
+                serial: padId(w.contestant_number),
+                createdAt: w.created_at,
+            }));
+
+            if (data.length > 0) setStars(mapped);
+
             // Flicker only when data actually changed after the first load
             if (isLiveUpdate && changed && hasLoaded.current) {
                 setUpdateKey(k => k + 1);
@@ -99,7 +119,7 @@ function RecentSuperstars({
                         <tr key={s.serial + "-" + i}>
                             <td>{s.serial}</td>
                             <td>{s.name}</td>
-                            <td>{s.date}</td>
+                            <td>{s.createdAt ? formatWinnerDate(s.createdAt, narrow) : s.date}</td>
                         </tr>
                     ))}
                 </tbody>

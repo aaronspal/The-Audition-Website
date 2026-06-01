@@ -10,13 +10,37 @@ function Hero() {
     const [deathCount, setDeathCount] = useState(null);
 
     useEffect(() => {
-        supabase
-            .from('deaths')
-            .select('count')
-            .single()
-            .then(({ data }) => {
-                if (data) setDeathCount(Number(data.count));
+        async function fetchDeathCount() {
+            const { data } = await supabase
+                .from('deaths')
+                .select('count')
+                .single();
+            if (data) setDeathCount(Number(data.count));
+        }
+
+        fetchDeathCount();
+
+        // Realtime updates (requires Realtime enabled for the table in Supabase)
+        const channel = supabase
+            .channel('deaths-changes')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'deaths' },
+                () => fetchDeathCount()
+            )
+            .subscribe((status) => {
+                if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+                    console.warn('[Hero] deaths realtime unavailable, relying on polling. status:', status);
+                }
             });
+
+        // Polling fallback so the count stays fresh even if realtime is off
+        const poll = setInterval(fetchDeathCount, 20000);
+
+        return () => {
+            supabase.removeChannel(channel);
+            clearInterval(poll);
+        };
     }, []);
 
     return (

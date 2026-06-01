@@ -161,9 +161,28 @@
     .superStarTable tbody.tableUpdating { animation: none; }
 }
 
+@media (max-width: 750px) {
+    .superStarTable th:nth-child(2),
+    .superStarTable td:nth-child(2) {
+        padding-right: 120px;
+    }
+}
+
 @media (max-width: 600px) {
-    .recentSuperstars { padding-left: 30px; padding-right: 30px; }
+    .recentSuperstars { padding-left: 20px; padding-right: 20px; }
     .superStarHeader h2 { font-size: 32px; }
     .superStarTable th { padding: 10px; font-size: 11px; }
     .superStarTable td { padding: 10px; font-size: 18px; }
+    .superStarTable th:nth-child(2),
+    .superStarTable td:nth-child(2) {
+        padding-right: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .superStarTable th:nth-child(2),
+    .superStarTable td:nth-child(2) {
+        padding-right: 80px;
+    }
+    .superStarTable td { padding: 10px; font-size: 16 px; }
 }
